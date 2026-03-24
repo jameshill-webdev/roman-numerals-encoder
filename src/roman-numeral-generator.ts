@@ -15,7 +15,13 @@ const MAPPING = {
 } as const;
 
 export function romanNumeralGenerator(input: number): string {
-  if (!Number.isInteger(input)) throw new Error("Expected an integer");
+  if (!Number.isInteger(input)) {
+    throw new Error("Expected an integer");
+  }
+
+  if (input < 1 || input > 3999) {
+    throw new Error("Input must be between 1 and 3999 (inclusive)");
+  }
 
   let result = "";
   let remainder = input;

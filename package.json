@@ -16,11 +16,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc && shx cp src/index.html dist/index.html && shx cp src/main.css dist/main.css",
-    "typecheck": "tsc --noEmit",
     "start": "npm run start:node",
     "start:node": "npm run build && node dist/index.js",
     "start:browser": "npm run build && http-server ./dist -c-1",
+    "build": "tsc && shx cp src/index.html dist/index.html && shx cp src/main.css dist/main.css",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
   },

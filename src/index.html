@@ -7,28 +7,35 @@
     <link rel="stylesheet" href="./main.css" />
   </head>
   <body>
-    <h1>Roman Numeral Generator</h1>
-    <form id="form">
-        <label for="input">Enter an integer between 1 and 3999 (inclusive):</label>
-        <input type="number" id="input" name="input" required />
-        <button type="submit">Generate</button>
-    </form>
-    <p id="output"></p>
+    <main>
+        <h1>Roman Numeral Generator</h1>
+        <form id="form">
+            <label for="input">Enter an integer between 1 and 3999 (inclusive):</label>
+            <input type="number" id="input" name="input" min="1" max="3999" step="1" inputmode="numeric" aria-describedby="error" required />
+            <p role="alert" id="error" class="error-message"></p>
+            <button type="submit">Generate</button>
+        </form>
+        <output name="output" for="input" id="output" role="status"></output>
+    </main>
     <script type="module">
         import { romanNumeralGenerator } from "./roman-numeral-generator.js";
     
         const form = document.getElementById("form");
-        const output = document.getElementById("output");
-    
+        const inputElement = document.getElementById("input");
+        const errorElement = document.getElementById("error");
+        const outputElement = document.getElementById("output");
+
         form.addEventListener("submit", (event) => {
             event.preventDefault();
-            const input = document.getElementById("input").value;
+            errorElement.style.display = "none";
 
             try {
-                const result = romanNumeralGenerator(parseInt(input, 10));
-                output.textContent = `Result: ${result}`;
+                const result = romanNumeralGenerator(parseInt(inputElement.value, 10));
+                outputElement.textContent = `Result: ${result}`;
             } catch (error) {
-                output.textContent = error.message;
+                outputElement.textContent = "";
+                errorElement.textContent = error.message;
+                errorElement.style.display = "block";
             }
         });
     </script>
