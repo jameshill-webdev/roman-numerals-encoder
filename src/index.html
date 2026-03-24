@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roman Numeral Generator</title>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <h1>Roman Numeral Generator</h1>
+    <form id="form">
+        <label for="input">Enter an integer between 1 and 3999 (inclusive):</label>
+        <input type="number" id="input" name="input" required />
+        <button type="submit">Generate</button>
+    </form>
+    <p id="output"></p>
+    <script type="module">
+        import { romanNumeralGenerator } from "./roman-numeral-generator.js";
+    
+        const form = document.getElementById("form");
+        const output = document.getElementById("output");
+    
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const input = document.getElementById("input").value;
+
+            try {
+                const result = romanNumeralGenerator(parseInt(input, 10));
+                output.textContent = `Result: ${result}`;
+            } catch (error) {
+                output.textContent = error.message;
+            }
+        });
+    </script>
+  </body>
+</html>
