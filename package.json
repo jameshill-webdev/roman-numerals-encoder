@@ -1,0 +1,28 @@
+{
+  "name": "roman-numerals-encoder",
+  "version": "1.0.0",
+  "description": "Coding kata challenge for encoding decimal numbers up to 3999 as Roman numerals (standard notation)",
+  "homepage": "https://github.com/jameshill-webdev/roman-numerals-encoder#readme",
+  "bugs": {
+    "url": "https://github.com/jameshill-webdev/roman-numerals-encoder/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jameshill-webdev/roman-numerals-encoder.git"
+  },
+  "license": "ISC",
+  "author": "James Hill",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "http-server": "^14.1.1",
+    "typescript": "^6.0.2"
+  }
+}
