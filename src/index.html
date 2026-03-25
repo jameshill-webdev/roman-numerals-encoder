@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,36 +8,56 @@
   </head>
   <body>
     <main>
-        <h1>Roman Numeral Generator</h1>
-        <form id="form">
-            <label for="input">Enter an integer between 1 and 3999 (inclusive):</label>
-            <input type="number" id="input" name="input" min="1" max="3999" step="1" inputmode="numeric" aria-describedby="error" required />
-            <p role="alert" id="error" class="error-message"></p>
-            <button type="submit">Generate</button>
-        </form>
-        <output name="output" for="input" id="output" role="status"></output>
+      <h1>Roman Numeral Generator</h1>
+      <form id="form">
+        <label for="input"
+          >Enter an integer between 1 and 3999 (inclusive):</label
+        >
+        <input
+          type="text"
+          id="input"
+          name="input"
+          inputmode="numeric"
+          required
+        />
+        <p role="alert" id="error" class="error-message"></p>
+        <button type="submit">Generate</button>
+        <label for="output">Roman numeral:</label>
+        <output name="output" for="input" id="output">
+          <span id="output-visual" aria-hidden="true"></span>
+          <span id="output-sr" class="sr-only" role="status"></span>
+        </output>
+      </form>
     </main>
     <script type="module">
-        import { romanNumeralGenerator } from "./roman-numeral-generator.js";
-    
-        const form = document.getElementById("form");
-        const inputElement = document.getElementById("input");
-        const errorElement = document.getElementById("error");
-        const outputElement = document.getElementById("output");
+      import { romanNumeralGenerator } from "./roman-numeral-generator.js";
 
-        form.addEventListener("submit", (event) => {
-            event.preventDefault();
-            errorElement.style.display = "none";
+      const form = document.getElementById("form");
+      const inputElement = document.getElementById("input");
+      const errorElement = document.getElementById("error");
+      const outputVisualElement = document.getElementById("output-visual");
+      const outputScreenReaderElement = document.getElementById("output-sr");
 
-            try {
-                const result = romanNumeralGenerator(parseInt(inputElement.value, 10));
-                outputElement.textContent = `Result: ${result}`;
-            } catch (error) {
-                outputElement.textContent = "";
-                errorElement.textContent = error.message;
-                errorElement.style.display = "block";
-            }
-        });
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        inputElement.setAttribute("aria-invalid", "false");
+        inputElement.removeAttribute("aria-describedby");
+        errorElement.textContent = "";
+        outputVisualElement.textContent = "";
+        outputScreenReaderElement.textContent = "";
+
+        try {
+          const result = romanNumeralGenerator(
+            parseInt(inputElement.value, 10),
+          );
+          outputVisualElement.textContent = result;
+          outputScreenReaderElement.textContent = result.split("").join(" ");
+        } catch (error) {
+          inputElement.setAttribute("aria-invalid", "true");
+          inputElement.setAttribute("aria-describedby", "error");
+          errorElement.textContent = error.message;
+        }
+      });
     </script>
   </body>
 </html>
